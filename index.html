@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faleichik_41_ FRONT-END</title>
+    <style>
+        /* --- НАСТРОЙКИ ДИЗАЙНА (ОФИЦИАЛЬНЫЙ СТИЛЬ) --- */
+        :root {
+            --primary-color: #2c3e50; /* Темно-синий */
+            --secondary-color: #34495e;
+            --accent-color: #2980b9; /* Насыщенный синий */
+            --hover-color: #1abc9c;   /* Бирюзовый */
+            --bg-color: #ecf0f1;
+            --text-color: #2c3e50;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- ШАПКА --- */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .page-header h1 { margin: 0; font-size: 2rem; font-weight: 600; }
+        .subtitle { margin-top: 10px; opacity: 0.9; font-size: 1.1rem; }
+        
+        .student-badge {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 5px 15px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* --- КОНТЕЙНЕР --- */
+        .container {
+            max-width: 800px; /* Чуть уже для меню */
+            margin: 40px auto;
+            padding: 0 20px;
+            flex: 1;
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- МЕНЮ (КАРТОЧКА) --- */
+        .menu-card {
+            background: var(--card-bg);
+            border-top: 5px solid var(--accent-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 40px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .menu-title {
+            color: var(--secondary-color);
+            margin-bottom: 30px;
+            font-size: 1.4rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        /* --- КНОПКИ-ССЫЛКИ --- */
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* Стиль ссылки-кнопки */
+        a.btn {
+            display: block;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none; /* Убираем подчеркивание */
+            padding: 15px 25px;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        a.btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* Иконка стрелочки при наведении (опционально) */
+        a.btn::after {
+            content: '➜';
+            position: absolute;
+            right: 20px;
+            opacity: 0;
+            transition: opacity 0.3s, right 0.3s;
+        }
+
+        a.btn:hover::after {
+            opacity: 1;
+            right: 15px;
+        }
+
+        /* Анимация появления */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- ПОДВАЛ --- */
+        .page-footer {
+            background-color: var(--primary-color);
+            color: #bdc3c7;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: auto;
+            font-size: 0.9rem;
+        }
+        
+        .page-footer a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.7;
+        }
+        .page-footer a:hover { opacity: 1; }
+
+    </style>
+</head>
+<body>
+
+    <!-- ШАПКА -->
+    <header class="page-header">
+        <h1>Faleichik_41_ FRONT-END</h1>
+        <p class="subtitle">Портфолио лабораторных работ</p>
+        <div class="student-badge">Студент: Фалейчик Максим | Группа: ПЗТ-41</div>
+    </header>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <main class="container">
+        <div class="menu-card">
+            <h2 class="menu-title">Выберите работу</h2>
+            
+            <div class="btn-container">
+                <a href="лаба 15/index.html" class="btn">Лабораторная работа 15</a>
+                <a href="лаба 16/index.html" class="btn">Лабораторная работа 16</a>
+                <a href="лаба 17-20/fox-club-project/index.html" class="btn">Лабораторная работа 17</a>
+                <a href="лаба 17-20/fox-club-project/login.html" class="btn">Лабораторные 18, 19-20</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- ПОДВАЛ -->
+    <footer class="page-footer">
+        <p>Faleichik_41_ FRONT-END © 2025</p>
+    </footer>
+
+</body>
+</html>

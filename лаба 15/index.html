@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лабораторная работа: Объекты JS</title>
+  <style>
+    /* --- НАСТРОЙКИ ДИЗАЙНА (ОФИЦИАЛЬНЫЙ СТИЛЬ) --- */
+    :root {
+      --primary-color: #2c3e50; /* Темно-синий */
+      --secondary-color: #34495e;
+      --accent-color: #2980b9; /* Насыщенный синий */
+      --hover-color: #1abc9c;   /* Бирюзовый для акцента */
+      --bg-color: #ecf0f1;
+      --text-color: #2c3e50;
+      --card-bg: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* --- ШАПКА --- */
+    .page-header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 1.5rem 0;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .page-header h1 { margin: 0; font-size: 1.8rem; font-weight: 600; }
+    .subtitle { margin-top: 5px; opacity: 0.9; font-size: 1rem; }
+    
+    .student-badge {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 5px 15px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 20px;
+      font-size: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    /* --- КОНТЕЙНЕР --- */
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 20px;
+      flex: 1;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* --- ПАНЕЛЬ УПРАВЛЕНИЯ (КНОПКИ) --- */
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 30px;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .btn {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .btn:hover {
+      background-color: var(--accent-color);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .btn-clear {
+      background-color: #e74c3c; /* Красный для очистки */
+    }
+    .btn-clear:hover { background-color: #c0392b; }
+
+    /* --- ОБЛАСТЬ ВЫВОДА --- */
+    .output-area {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    /* --- КАРТОЧКИ --- */
+    .card {
+      background: var(--card-bg);
+      border-left: 5px solid var(--accent-color);
+      border-radius: 6px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+      overflow: hidden;
+      animation: fadeIn 0.5s ease-out;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+    }
+
+    .card-body { padding: 20px; }
+    
+    .card-title {
+      margin-top: 0;
+      color: var(--primary-color);
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+
+    .card-text {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 5px;
+    }
+    
+    b { color: var(--secondary-color); }
+
+    /* Анимация появления */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- ПОДВАЛ --- */
+    .page-footer {
+      background-color: var(--primary-color);
+      color: #bdc3c7;
+      text-align: center;
+      padding: 15px 0;
+      margin-top: auto;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ШАПКА -->
+  <header class="page-header">
+    <h1>Объекты в JavaScript</h1>
+    <p class="subtitle">Интерактивная лабораторная работа</p>
+    <div class="student-badge">Студент: Фалейчик Максим | Группа: ПЗТ-41</div>
+  </header>
+
+  <main class="container">
+    
+    <!-- ПАНЕЛЬ УПРАВЛЕНИЯ -->
+    <nav class="controls">
+      <button class="btn" onclick="task1()">1. Встроенные объекты</button>
+      <button class="btn" onclick="task2()">2. Показать студентов</button>
+      <button class="btn" onclick="task3()">3. Доступ к свойствам</button>
+      <button class="btn" onclick="task4()">4. Удалить возраст</button>
+      <button class="btn" onclick="task5()">5. Проверка свойств</button>
+      <button class="btn" onclick="task6()">6. Перебор (Цикл)</button>
+      <button class="btn btn-clear" onclick="clearScreen()">🗑 Очистить экран</button>
+    </nav>
+
+    <!-- ОБЛАСТЬ РЕЗУЛЬТАТОВ -->
+    <div id="output" class="output-area">
+      <!-- Сюда будут добавляться карточки -->
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Добро пожаловать</h3>
+          <p class="card-text">Выберите задание на панели управления выше, чтобы увидеть результат выполнения кода.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="page-footer">
+    <p>© 2025 УО ГГПК — Фалейчик Максим</p>
+  </footer>
+
+<script>
+  /* --- ДАННЫЕ И ЛОГИКА --- */
+
+  // Исходный массив студентов
+  let students = [
+    {
+      name: "Фалейчик Максим",
+      age: 18,
+      group: "ПЗТ-41",
+      sayHello: function() { return "Здравствуйте! Меня зовут " + this.name; }
+    },
+    {
+      name: "Иван Петров",
+      age: 19,
+      group: "ПЗТ-41",
+      sayHello: function() { return "Приветствую! Я " + this.name; }
+    }
+  ];
+
+  // Вспомогательная функция очистки
+  function clearScreen() {
+    const out = document.getElementById("output");
+    out.innerHTML = "";
+  }
+
+  // Вспомогательная функция вывода карточки
+  function showCard(title, contentArray) {
+    const out = document.getElementById("output");
+    
+    const card = document.createElement("div");
+    card.className = "card";
+    
+    const body = document.createElement("div");
+    body.className = "card-body";
+    
+    const h3 = document.createElement("h3");
+    h3.className = "card-title";
+    h3.innerHTML = title;
+    
+    body.appendChild(h3);
+
+    contentArray.forEach(msg => {
+      const p = document.createElement("div");
+      p.className = "card-text";
+      p.innerHTML = msg;
+      body.appendChild(p);
+    });
+
+    card.appendChild(body);
+    out.appendChild(card);
+  }
+
+  /* --- ФУНКЦИИ ЗАДАНИЙ --- */
+
+  // 1. Встроенные объекты
+  function task1() {
+    clearScreen();
+    showCard("1. Встроенные объекты JS", [
+      `<b>Число Пи (Math.PI):</b> ${Math.PI}`,
+      `<b>Дата и время:</b> ${new Date().toLocaleString()}`,
+      `<b>Заголовок страницы:</b> ${document.title}`
+    ]);
+  }
+
+  // 2. Вывод студентов
+  function task2() {
+    clearScreen();
+    students.forEach((stud, i) => {
+      // Проверка на наличие метода (так как JSON.stringify удаляет функции, если мы перезаписывали объект)
+      let greeting = (typeof stud.sayHello === 'function') ? stud.sayHello() : "(Метод отсутствует)";
+      
+      showCard(`Студент №${i + 1}`, [
+        `<b>ФИО:</b> ${stud.name}`,
+        `<b>Возраст:</b> ${stud.age !== undefined ? stud.age : '<span style="color:red">Удалено</span>'}`,
+        `<b>Группа:</b> ${stud.group}`,
+        `<i>Приветствие:</i> "${greeting}"`
+      ]);
+    });
+  }
+
+  // 3. Доступ к свойствам
+  function task3() {
+    clearScreen();
+    let info = [];
+    students.forEach((stud, i) => {
+      info.push(`<b>Студент ${i + 1}:</b>`);
+      info.push(`Через точку (name): ${stud.name}`);
+      info.push(`Через скобки ['group']: ${stud['group']}`);
+      info.push(`<hr style="opacity:0.2">`);
+    });
+    showCard("3. Демонстрация доступа", info);
+  }
+
+  // 4. Удаление свойства
+  function task4() {
+    clearScreen();
+    
+    // 1. Показываем ДО
+    let beforeState = students.map(s => JSON.stringify(s));
+    showCard("Состояние ДО удаления", beforeState);
+
+    // 2. Удаляем age
+    students.forEach(stud => delete stud.age);
+
+    // 3. Показываем ПОСЛЕ
+    let afterState = students.map(s => JSON.stringify(s));
+    
+    setTimeout(() => {
+      showCard("Состояние ПОСЛЕ удаления (age)", afterState);
+      alert("Свойство 'age' было удалено у всех объектов!");
+    }, 400); // Небольшая задержка для эффекта
+  }
+
+  // 5. Проверка существования (in)
+  function task5() {
+    clearScreen();
+    let checks = [];
+    
+    students.forEach((stud, i) => {
+      checks.push(`<b>Объект ${i + 1} (${stud.name}):</b>`);
+      checks.push(`Свойство "name" есть? -> <b>${"name" in stud}</b>`);
+      checks.push(`Свойство "age" есть? -> <b>${"age" in stud}</b>`);
+      checks.push(`<hr style="opacity:0.2">`);
+    });
+
+    showCard("5. Проверка оператором 'in'", checks);
+  }
+
+  // 6. Перебор (for..in)
+  function task6() {
+    clearScreen();
+    students.forEach((stud, i) => {
+      let lines = [];
+      for (let key in stud) {
+        let val = stud[key];
+        if (typeof val === 'function') val = "function() {...}";
+        lines.push(`<b>${key}</b>: ${val}`);
+      }
+      showCard(`6. Перебор свойств студента ${i+1}`, lines);
+    });
+  }
+
+</script>
+</body>
+</html>
