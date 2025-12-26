@@ -1,6 +1,3 @@
-
-
-
 @import 'base/_variables.css';
 @import 'base/_typography.css';
 
@@ -29,6 +26,7 @@
 @import 'sections/_abonements.css';
 @import 'sections/_goals.css';
 @import 'sections/_login.css';
+
 
 
 
