@@ -1,0 +1,257 @@
+    <!DOCTYPE html>
+    <html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Профиль</title>
+        
+        <link rel="stylesheet" href="css/main.css">
+        
+        
+         
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ru.js"></script>
+    </head>
+    <body>
+
+        <header class="profile-header">
+            <div class="container profile-header-container">
+                <a href="index.html" class="logo">
+                    <img src="assets/images/icons/logo.png" alt="FOX CLUB Logo" class="header-logo-image">
+                </a>
+                <div class="profile-info">
+                    <span class="profile-name" id="profileUserName">Загрузка...</span> 
+                </div>
+            </div>
+        </header>
+
+        <section class="abonements-section">
+            <div class="container abonements-container">
+                <h2 class="section-title abonements-title">Абонементы</h2>
+
+                <div class="abonement-cards-and-add-wrapper">
+                    
+                    <div class="abonement-carousel-wrapper">
+                        <div class="abonement-cards-carousel" id="abonementCardsCarousel">
+                            
+                            <div class="price-card" data-type="Студенческий абонемент" data-price="75" data-detail1="Неограниченное кол-во занятий" data-detail2="только для студентов" data-purchase-date="22.10.2024" data-expiry-date="22.11.2024">
+                                <div class="price-card-logo-bg"></div> 
+                                <h3 class="price-card-title">Студенческий абонемент</h3>
+                                <p class="price-card-price">75р.</p>
+                                <div class="price-card-details">
+                                    <p>Неограниченное кол-во занятий</p>
+                                    <p>только для студентов</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="add-abonement-column">
+                        <button class="add-button" id="openAddAbonementBtn">+</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <div id="abonementModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2>ВАШ АБОНЕМЕНТ</h2>
+                <h3 id="modalAbonementType"></h3>
+                <p>Дата покупки: <span id="modalPurchaseDate"></span></p>
+                <p>Действует до: <span id="modalExpiryDate"></span></p>
+                <div class="qr-code-placeholder">
+                    
+                    <p>Место для QR-кода</p>
+                    <div style="width: 150px; height: 150px; background-color: #eee; margin: 20px auto; border-radius: 5px;"></div>
+                </div>
+                <p>Для сканирования администратором</p>
+            </div>
+        </div>
+
+                <!-- Модальное окно создания абонемента -->
+        <div id="addAbonementModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" id="closeAddModal">&times;</span>
+                <h2>Добавить абонемент</h2>
+                <form id="addAbonementForm">
+                    <div class="modal-input-group">
+                        <label>Название (тип)</label>
+                        <input type="text" id="newType" placeholder="Напр: Студенческий" required>
+                    </div>
+                    <div class="modal-input-group">
+                        <label>Цена (руб.)</label>
+                        <input type="number" id="newPrice" placeholder="75" required>
+                    </div>
+                    <div class="modal-input-group">
+                        <label>Описание (через запятую)</label>
+                        <input type="text" id="newDetails" placeholder="Безлимит, только для студентов" required>
+                    </div>
+                    <div class="modal-input-group">
+                        <label>Дата покупки</label>
+                        <input type="text" id="newPurchaseDate" class="datepicker" required>
+                    </div>
+                    <div class="modal-input-group">
+                        <label>Действует до</label>
+                        <input type="text" id="newExpiryDate" class="datepicker" required>
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="submit" class="add-goal-btn">СОХРАНИТЬ</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <section class="goals-section">
+            <div class="container goals-container">
+                <h2 class="section-title goals-title">Цели</h2>
+
+                <div class="goals-cards-and-add-wrapper">
+                    <div class="goals-carousel-wrapper">
+                        <div class="goals-cards-carousel" id="goalsCardsCarousel">
+                            
+                            <div class="goal-card">
+                                <div class="goal-card-icon-bg icon-bg-weight"></div>
+                                <h3 class="goal-card-title">Похудение</h3>
+                                <p class="goal-card-subtitle">снижение веса</p>
+                                <div class="goal-card-progress">
+                                    <span class="progress-percent">0%</span>
+                                </div>
+                            </div>
+                            
+                            <div class="goal-card">
+                                <div class="goal-card-icon-bg icon-bg-power"></div>
+                                <h3 class="goal-card-title">Силовые показатели</h3>
+                                <p class="goal-card-subtitle">максимальный вес на раз<br>(жим штанги лежа)</p>
+                                <div class="goal-card-progress">
+                                    <span class="progress-percent">0%</span>
+                                </div>
+                            </div>
+                            
+                            <div class="goal-card">
+                                <div class="goal-card-icon-bg icon-bg-cardio"></div>
+                                <h3 class="goal-card-title">Кардионагрузка</h3>
+                                <p class="goal-card-subtitle">количество шагов<br>в день</p>
+                                <div class="goal-card-progress">
+                                    <span class="progress-percent">0%</span>
+                                </div>
+                            </div>
+                            
+                            <div class="goal-card">
+                                <div class="goal-card-icon-bg icon-bg-weight"></div>
+                                <h3 class="goal-card-title">Похудение</h3>
+                                <p class="goal-card-subtitle">снижение веса</p>
+                                <div class="goal-card-progress">
+                                    <span class="progress-percent">0%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="add-goal-column">
+                        <button class="add-button goal-add-button" id="openGoalModalBtn">+</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="goalModal" class="modal">
+            <div class="modal-content new-goal-modal-content">
+                
+                <span class="close-button close-goal-modal">&times;</span>
+
+                
+                <div class="modal-tabs" id="modalGoalTabs">
+                    <button class="modal-tab" data-goal-type="weight-loss">
+                        <img src="assets/images/icons/weight_loss.png" alt="Weight Loss Icon">
+                        Похудение
+                    </button>
+                    <button class="modal-tab" data-goal-type="mass-gain">
+                        <img src="assets/images/icons/weight_gain.png" alt="Mass Gain Icon">
+                        Набор массы
+                    </button>
+                    <button class="modal-tab" data-goal-type="strength">
+                        <img src="assets/images/icons/power.png" alt="Strength Icon">
+                        Силовые показатели
+                    </button>
+                    <button class="modal-tab" data-goal-type="cardio">
+                        <img src="assets/images/icons/cardio_load.png" alt="Cardio Icon">
+                        Кардионагрузка
+                    </button>
+                </div>
+
+                
+                <h3 class="modal-section-title">Добавьте детали цели</h3>
+
+                
+                <div id="goalDetailsForm">
+                    
+                </div>
+
+                
+                <div class="modal-input-group">
+                    <label for="goalComment">Дополнительный комментарий</label>
+                    <input type="text" id="goalComment" placeholder="Добавьте примечание...">
+                </div>
+
+                
+                <div class="modal-buttons">
+                    <button class="add-goal-btn" id="addGoalBtn">ДОБАВИТЬ ЦЕЛЬ</button>
+                    <button class="cancel-btn close-goal-modal" id="cancelGoalBtn">ОТМЕНА</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="main-footer">
+            <div class="container footer-content">
+                <div class="footer-block footer-brand">
+                    <a href="#" class="footer-logo">FOX CLUB</a>
+                    <p class="footer-slogan">Станьте клиентом нашей сети.<br>Мы Fox Club!</p>
+                    <a href="#" class="btn btn-primary footer-btn">Записаться на занятие</a>
+                </div>
+
+                <div class="footer-block footer-contacts">
+                    <div class="location-group">
+                        <h4 class="location-title">Минск</h4>
+                        <p>УЛИЦА КАЗИНЦА, 11А (БЦ, ГЕРМЕС)</p>
+                        <p>УЛИЦА ДОЛГОБРОДСКАЯ, 43</p>
+                        <p>УЛИЦА ГРУШЕВСКАЯ, 83</p>
+                    </div>
+                </div>
+
+                <div class="footer-block footer-contacts">
+                    <div class="location-group">
+                        <h4 class="location-title">Могилев</h4>
+                        <p>ПРОСПЕКТ ШМИДТА, 46</p>
+                    </div>
+                    <div class="location-group">
+                        <h4 class="location-title">Гродно</h4>
+                        <p>ПРОСПЕКТ Я.КУПАЛЫ, 22</p>
+                    </div>
+                </div>
+
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><img src="assets/images/icons/facebook.png" alt="Facebook"></a>
+                    <a href="#" class="social-icon"><img src="assets/images/icons/instagram.png" alt="Instagram"></a>
+                    <a href="#" class="social-icon"><img src="assets/images/icons/vk.png" alt="VK"></a>
+                    <a href="#" class="social-icon"><img src="assets/images/icons/youtube.png" alt="YouTube"></a>
+                </div>
+            </div>
+        <div class="footer-bottom">
+        <div class="container">
+            <p>Copyright © 2003-2025</p>
+            <p>Сеть тренажерных залов Fox Club</p>
+        </div>
+        </div>
+
+        </footer>
+
+        
+        <script src="js/main.js"></script>
+    </body>
+    </html>
